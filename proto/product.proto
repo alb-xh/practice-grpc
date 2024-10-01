@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package product;
+
+message Product {
+  sint32 id = 1;
+  string name = 2;
+  string description = 3;
+  string image_src = 4;
+  sint32 price = 5;
+  sint32 quanity = 6;
+}
+
+message CreateProductInput {
+  Product product = 1;
+}
+
+message CreateProductOutput {
+  int32 id = 1;
+}
+
+message GetProductInput {
+  int32 id = 1;
+}
+
+message GetProductOutput {
+  Product product = 1;
+}
+
+enum StringFilterOperator {
+  STRING_FILTER_OPERATOR_EQUAL = 0;
+  STRING_FILTER_OPERATOR_NOT_EQUAL = 1;
+  STRING_FILTER_OPERATOR_INCLUDES = 2;
+  STRING_FILTER_OPERATOR_EXLUDES = 3;
+  STRING_FILTER_OPERATOR_STARTS_WITH = 4;
+  STRING_FILTER_OPERATOR_ENDS_WITH = 5;
+}
+
+enum Int32FilterOperator {
+  INT_32_FILTER_OPERATOR_EQUAL = 0;
+  INT_32_FILTER_OPERATOR_NOT_EQUAL = 1;
+  INT_32_FILTER_OPERATOR_LARGER_THAN = 2;
+  INT_32_FILTER_OPERATOR_SMALLER_THAN = 3;
+  INT_32_FILTER_OPERATOR_BETWEEN = 4;
+}
+
+message StringFilter {
+  StringFilterOperator operator = 1;
+  string value = 2;
+}
+
+message Int32Range {
+  int32 from = 1;
+  int32 to = 2;
+}
+
+message Int32Filter {
+  Int32FilterOperator operator = 1;
+  optional int32 value = 2;
+  optional Int32Range range = 3;
+}
+
+message ListFilter {
+  optional int32 id = 1;
+  optional StringFilter name = 2;
+  optional Int32Filter price = 3;
+  optional bool inStock = 4;
+}
+
+message ListProductsInput {
+  repeated ListFilter filters = 1;
+}
+
+message ListProductsOutput {
+  repeated Product products = 1;
+}
+
+service ProductService {
+  rpc CreateProduct (CreateProductInput) returns (CreateProductOutput);
+  rpc GetProduct (GetProductInput) returns (GetProductOutput);
+  rpc ListProducts (ListProductsInput) returns (ListProductsOutput);
+}
