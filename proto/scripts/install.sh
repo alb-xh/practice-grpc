@@ -7,6 +7,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   sudo apt install -y protobuf-compiler
   protoc --version
 else
-  echo "Os is not supported!";
+  echo "OS is not supported!";
   exit 1;
 fi

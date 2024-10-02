@@ -4,6 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "migration:run": "typeorm-ts-node-esm migration:run -d ./src/db/dataSource.ts",
+    "migration:show": "typeorm-ts-node-esm migration:show -d ./src/db/dataSource.ts",
+    "migration:revert": "typeorm-ts-node-esm migration:revert -d ./src/db/dataSource.ts",
+    "migration:generate": "typeorm-ts-node-esm migration:generate ./src/db/migrations/$npm_config_name -d ./src/db/dataSource.ts",
+    "env:dev:start": "docker compose --profile dev --env-file .env.dev up -d",
+    "env:dev:stop": "docker compose --profile dev --env-file .env.dev down",
+    "env:dev:reset": "npm run env:dev:stop -- -v && npm run env:dev:start && npm run migration:run",
     "build": "rm -rf ./dist && tsc",
     "start": "node ./dist/index.js",
     "dev": "tsx ./src/index.ts"
@@ -15,5 +22,11 @@
   "devDependencies": {
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "pg": "^8.13.0",
+    "reflect-metadata": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20"
   }
 }

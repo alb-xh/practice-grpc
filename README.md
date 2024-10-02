@@ -7,7 +7,8 @@
 1. `cd server`
 2. `nvm use`
 3. `npm i`
-4. `npm run dev`
+4. `npm run env:dev:reset`
+5. `npm run dev`
 
 ### Client
 
