@@ -21,6 +21,10 @@ class Config  {
       database: this.env.DB_DATABASE,
     };
   }
+
+  getServerPort () {
+    return parseInt(this.env.SERVER_PORT as string, 10);
+  }
 }
 
 const config = new Config(env);

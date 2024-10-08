@@ -1,14 +1,18 @@
-import './config.js';
+import { resolve } from 'node:path';
 
-import { dataSource, Product } from './db/index.js';
+import { load } from '@grpc/proto-loader';
+import { loadPackageDefinition } from '@grpc/grpc-js';
+import logger from 'loglevel';
 
-const main = async () => {
-  await dataSource.initialize();
+import { config } from './config.js';
+import { dataSource } from './db/index.js';
+import { Server } from './server.js';
+import { ProductService, ServiceDefinitionLoader  } from './services/index.js';
 
-  dataSource.manager.save(Product, {
-    name: 'production',
-    price: 10,
-  });
-};
+logger.setLevel(config.isProd() ? 'INFO' : 'DEBUG');
 
-main();
+const serviceDefinitionLoader = new ServiceDefinitionLoader(load, loadPackageDefinition, resolve);
+const server = new Server(serviceDefinitionLoader, [ new ProductService(dataSource) ]);
+
+await dataSource.initialize();
+await server.init(config.getServerPort());
