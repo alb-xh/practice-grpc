@@ -1,16 +1,22 @@
 syntax = "proto3";
 
+package product;
+
 message Product {
   sint32 id = 1;
   string name = 2;
   string description = 3;
   string image_src = 4;
   sint32 price = 5;
-  sint32 quanity = 6;
+  sint32 quantity = 6;
 }
 
 message CreateProductInput {
-  Product product = 1;
+  string name = 2;
+  string description = 3;
+  string image_src = 4;
+  sint32 price = 5;
+  sint32 quantity = 6;
 }
 
 message CreateProductOutput {

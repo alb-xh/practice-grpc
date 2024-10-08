@@ -1,2 +1,3 @@
-export { ProductService } from './product.js';
-export { ServiceDefinitionLoader } from './definition-loader.js';
+export { BaseService } from './base-service.js';
+export { ProductService } from './product-service.js';
+
