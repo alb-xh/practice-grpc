@@ -132,8 +132,8 @@ export function int32FilterOperatorToJSON(object: Int32FilterOperator): string {
 export interface Product {
   id: number;
   name: string;
-  description: string;
-  imageSrc: string;
+  description?: string | undefined;
+  imageSrc?: string | undefined;
   price: number;
   quantity: number;
 }
@@ -190,7 +190,7 @@ export interface ListProductsOutput {
 }
 
 function createBaseProduct(): Product {
-  return { id: 0, name: "", description: "", imageSrc: "", price: 0, quantity: 0 };
+  return { id: 0, name: "", description: undefined, imageSrc: undefined, price: 0, quantity: 0 };
 }
 
 export const Product: MessageFns<Product> = {
@@ -201,10 +201,10 @@ export const Product: MessageFns<Product> = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
-    if (message.imageSrc !== "") {
+    if (message.imageSrc !== undefined) {
       writer.uint32(34).string(message.imageSrc);
     }
     if (message.price !== 0) {
@@ -284,8 +284,8 @@ export const Product: MessageFns<Product> = {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      imageSrc: isSet(object.imageSrc) ? globalThis.String(object.imageSrc) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : undefined,
+      imageSrc: isSet(object.imageSrc) ? globalThis.String(object.imageSrc) : undefined,
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
       quantity: isSet(object.quantity) ? globalThis.Number(object.quantity) : 0,
     };
@@ -299,10 +299,10 @@ export const Product: MessageFns<Product> = {
     if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.imageSrc !== "") {
+    if (message.imageSrc !== undefined) {
       obj.imageSrc = message.imageSrc;
     }
     if (message.price !== 0) {
@@ -321,8 +321,8 @@ export const Product: MessageFns<Product> = {
     const message = createBaseProduct();
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    message.imageSrc = object.imageSrc ?? "";
+    message.description = object.description ?? undefined;
+    message.imageSrc = object.imageSrc ?? undefined;
     message.price = object.price ?? 0;
     message.quantity = object.quantity ?? 0;
     return message;

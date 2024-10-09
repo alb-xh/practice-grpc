@@ -5,8 +5,8 @@ package product;
 message Product {
   sint32 id = 1;
   string name = 2;
-  string description = 3;
-  string image_src = 4;
+  optional string description = 3;
+  optional string image_src = 4;
   sint32 price = 5;
   sint32 quantity = 6;
 }

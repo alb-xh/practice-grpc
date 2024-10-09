@@ -1,7 +1,3 @@
-import { resolve } from 'node:path';
-
-import { load } from '@grpc/proto-loader';
-import { loadPackageDefinition } from '@grpc/grpc-js';
 import logger from 'loglevel';
 
 import { config } from './config.js';
