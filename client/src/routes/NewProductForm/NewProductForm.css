@@ -1,0 +1,19 @@
+.new_product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.new_product > form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 20px;
+  font-size: medium;
+}
+
+.new_product input {
+  height: 30px;
+}
+

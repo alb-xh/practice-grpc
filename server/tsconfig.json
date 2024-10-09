@@ -15,5 +15,9 @@
     "paths": {
       "@proto/*": [ "../proto/build/*" ],
     },
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "fixtures.ts"
+  ]
 }

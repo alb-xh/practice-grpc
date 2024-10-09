@@ -8,9 +8,10 @@
     "migration:show": "typeorm-ts-node-esm migration:show -d ./src/db/dataSource.ts",
     "migration:revert": "typeorm-ts-node-esm migration:revert -d ./src/db/dataSource.ts",
     "migration:generate": "typeorm-ts-node-esm migration:generate ./src/db/migrations/$npm_config_name -d ./src/db/dataSource.ts",
+    "fixtures:load": "tsx ./fixtures.ts",
     "env:dev:start": "docker compose --profile dev --env-file .env.dev up -d",
     "env:dev:stop": "docker compose --profile dev --env-file .env.dev down",
-    "env:dev:reset": "npm run env:dev:stop -- -v && npm run env:dev:start && npm run migration:run",
+    "env:dev:reset": "npm run env:dev:stop -- -v && npm run env:dev:start && npm run migration:run && sleep 5 && npm run fixtures:load",
     "build": "rm -rf ./dist && tsc && tsc-alias",
     "start": "node ./dist/server/src/index.js",
     "dev": "tsx ./src/index.ts"
@@ -21,18 +22,21 @@
   "description": "",
   "devDependencies": {
     "@types/lodash": "^4.17.10",
+    "@types/validator": "^13.12.2",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.0.3",
     "@grpc/grpc-js": "^1.12.0",
     "lodash": "^4.17.21",
     "loglevel": "^1.9.2",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2",
     "ts-proto": "^2.2.3",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "validator": "^13.12.0"
   }
 }
