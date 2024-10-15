@@ -1,6 +1,6 @@
 import { promisify } from 'node:util';
 import { URL } from 'node:url';
-import { Server as GrpcServer, ServerCredentials as GrpcServerCredentials, ServerOptions as GrpcServerOptions } from "@grpc/grpc-js";
+import { Server as GrpcServer, ServerCredentials as GrpcServerCredentials, ServerOptions as GrpcServerOptions } from "@proto/grpc-js.js";
 import logger from 'loglevel';
 
 import { BaseService } from './services/index.js';

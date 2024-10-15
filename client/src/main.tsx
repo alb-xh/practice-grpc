@@ -1,3 +1,5 @@
+import 'google-protobuf';
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,7 +9,7 @@ import './index.css'
 import Root from './routes/Root';
 import Error from "./routes/Error";
 import ProductList from './routes/ProductList';
-import Product from './routes/Product';
+import Product, { loader as productLoader } from './routes/Product';
 import NewProductForm from './routes/NewProductForm';
 
 const router = createBrowserRouter([
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { index: true, element: <ProductList /> },
-      { path: 'products/:id', element: <Product /> },
+      { path: 'products/:id', element: <Product />, loader: productLoader },
       { path: 'create-product', element: <NewProductForm /> },
     ]
   },

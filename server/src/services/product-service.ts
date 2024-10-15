@@ -1,15 +1,23 @@
 import { DataSource } from "typeorm";
+import { sendUnaryData, ServerUnaryCall, status } from "@grpc/grpc-js";
 
-import { ProductServiceService, CreateProductInput, CreateProductOutput, GetProductInput, GetProductOutput, ListProductsInput, ListProductsOutput, Product } from '@proto/product.js';
-import { sendUnaryData, ServerUnaryCall, status } from "@grpc/grpc-js"
+import {
+  ProductServiceDesc,
+  CreateProductInput,
+  CreateProductOutput,
+  GetProductInput,
+  GetProductOutput,
+  ListProductsInput,
+  ListProductsOutput,
+  Product
+} from '@proto/product.js';
 
 import { Product as ProductEntity } from "src/db/index.js";
 import { BaseService } from "./base-service.js";
 
-// No validation for now
 export class ProductService extends BaseService {
   constructor (private readonly dataSource: DataSource) {
-    super(ProductServiceService);
+    super(ProductServiceDesc);
   }
 
   createProduct (
